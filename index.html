@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Towazon™ – Instant Vehicle Recovery, Anytime.</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description"
+        content="Towazon™ is an AI-powered platform that connects drivers to the nearest verified tow operator in seconds. Join early access for our UK launch." />
+  <meta name="color-scheme" content="dark light" />
+
+  <!-- Optional: Open Graph for nicer link previews -->
+  <meta property="og:title" content="Towazon™ – Instant Vehicle Recovery, Anytime." />
+  <meta property="og:description"
+        content="AI-powered platform connecting you to the nearest verified tow operator in seconds. Join early access." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://towazon.com" />
+
+  <link rel="stylesheet" href="assets/css/main.css" />
+
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet">
+</head>
+<body>
+  <!-- subtle background pattern -->
+  <div class="bg-lines" aria-hidden="true"></div>
+
+  <main class="page">
+    <!-- HERO / LEFT SIDE  -->
+    <section class="hero">
+      <header class="hero-header">
+        <p class="hero-tag">Coming soon in the UK</p>
+        <h1 class="hero-title">
+          Towazon™ –<br />
+          <span>Instant Vehicle Recovery, Anytime.</span>
+        </h1>
+        <p class="hero-sub">
+          AI-powered platform connecting you to the nearest verified tow operator in seconds.
+          Join the early access list and be first to know when we launch in your area.
+        </p>
+      </header>
+
+      <ul class="hero-badges" aria-label="Key benefits">
+        <li>⚡ Fast, on-demand recovery</li>
+        <li>🛟 Verified operators only</li>
+        <li>🤖 Smart, AI-driven dispatch</li>
+      </ul>
+    </section>
+
+    <!-- FORM / RIGHT SIDE -->
+    <section class="panel" aria-label="Join early access">
+      <h2 class="panel-title">Join the early access list</h2>
+      <p class="panel-sub">
+        Tell us where you are and how you might use Towazon. We’ll prioritise invites as we roll out
+        across the UK.
+      </p>
+
+      <form id="early-access"
+            class="form"
+            method="POST"
+            action="https://formspree.io/f/YOUR_FORM_ID_HERE">
+        <div class="field">
+          <label for="name">Full name</label>
+          <input id="name" name="name" type="text" placeholder="Alex Khan" required />
+        </div>
+
+        <div class="field">
+          <label for="email">Email address</label>
+          <input id="email" name="email" type="email" placeholder="you@example.com" required />
+        </div>
+
+        <div class="field">
+          <label for="postcode">Postcode</label>
+          <input id="postcode" name="postcode" type="text" placeholder="B1 1AA" required />
+        </div>
+
+        <div class="field">
+          <label for="role">I am a…</label>
+          <select id="role" name="role" required>
+            <option value="">Select one</option>
+            <option value="driver">Driver / vehicle owner</option>
+            <option value="operator">Tow truck operator / recovery business</option>
+            <option value="fleet">Fleet / business manager</option>
+            <option value="other">Other</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label for="notes">
+            Anything we should know?
+            <span class="muted">(optional)</span>
+          </label>
+          <textarea id="notes"
+                    name="notes"
+                    placeholder="Tell us about typical routes, breakdown pain points, or fleet details."></textarea>
+        </div>
+
+        <!-- Simple consent checkbox -->
+        <div class="field checkbox-row">
+          <input id="consent"
+                 name="consent"
+                 type="checkbox"
+                 required />
+          <label for="consent" class="checkbox-label">
+            I agree to receive early-access updates from Towazon and accept the privacy policy.
+          </label>
+        </div>
+
+        <!-- Honeypot anti-spam (hidden from humans) -->
+        <input type="text"
+               name="website"
+               tabindex="-1"
+               autocomplete="off"
+               class="honeypot" />
+
+        <button type="submit" class="btn" id="submit-btn">
+          <span class="btn-label">Request Early Access</span>
+          <span class="btn-spinner" aria-hidden="true"></span>
+        </button>
+
+        <p class="form-footnote">
+          No spam. We’ll only email you about Towazon’s launch and occasional short surveys.
+        </p>
+
+        <p id="form-message" class="form-message" role="status" aria-live="polite"></p>
+      </form>
+
+      <!-- Success state (JS toggles visibility) -->
+      <div id="success-state" class="success" hidden>
+        <div class="success-icon">✓</div>
+        <h3>You're on the list.</h3>
+        <p>
+          Thanks for registering your interest in Towazon. We’ll email you as soon as we launch
+          in your area, and may send a short survey to help us prioritise features for drivers
+          and operators like you.
+        </p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p>© <span id="year"></span> Towazon™. All rights reserved.</p>
+  </footer>
+
+  <script src="assets/js/main.js"></script>
+</body>
+</html>
