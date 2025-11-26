@@ -8,6 +8,41 @@ const submitBtn = document.getElementById("submit-btn");
 const btnLabel = submitBtn.querySelector(".btn-label");
 const btnSpinner = submitBtn.querySelector(".btn-spinner");
 const SHEETDB_ENDPOINT = "https://sheetdb.io/api/v1/v3gqxp0dzd4fl";
+const successModal = document.getElementById("success-modal");
+const modalCloseBtn = document.getElementById("modal-close");
+const modalCtaBtn = document.getElementById("modal-cta");
+
+// simple modal helpers
+function openModal() {
+  if (!successModal) return;
+  successModal.hidden = false;
+  requestAnimationFrame(() => successModal.classList.add("visible"));
+  document.body.classList.add("modal-open");
+  (modalCtaBtn || modalCloseBtn)?.focus();
+}
+
+function closeModal() {
+  if (!successModal) return;
+  successModal.classList.remove("visible");
+  document.body.classList.remove("modal-open");
+  setTimeout(() => {
+    if (!successModal.classList.contains("visible")) {
+      successModal.hidden = true;
+    }
+  }, 220);
+}
+
+modalCloseBtn?.addEventListener("click", closeModal);
+modalCtaBtn?.addEventListener("click", closeModal);
+successModal?.addEventListener("click", (e) => {
+  if (e.target === successModal) closeModal();
+});
+
+document.addEventListener("keydown", (e) => {
+  if (e.key === "Escape" && successModal && !successModal.hidden) {
+    closeModal();
+  }
+});
 
 // helper to show messages
 function showMessage(text, type = "ok") {
@@ -87,6 +122,7 @@ form.addEventListener("submit", async (e) => {
       showMessage("");
       successBox.hidden = false;
       showMessage("You're on the list – check your inbox soon.", "ok");
+      openModal();
     } else {
       showMessage("Something went wrong sending your request. Please try again.", "error");
     }
