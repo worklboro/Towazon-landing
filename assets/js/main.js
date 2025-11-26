@@ -7,6 +7,7 @@ const successBox = document.getElementById("success-state");
 const submitBtn = document.getElementById("submit-btn");
 const btnLabel = submitBtn.querySelector(".btn-label");
 const btnSpinner = submitBtn.querySelector(".btn-spinner");
+const SHEETDB_ENDPOINT = "https://sheetdb.io/api/v1/v3gqxp0dzd4fl";
 
 // helper to show messages
 function showMessage(text, type = "ok") {
@@ -41,6 +42,11 @@ form.addEventListener("submit", async (e) => {
     return;
   }
 
+  if (!SHEETDB_ENDPOINT || SHEETDB_ENDPOINT.includes("YOUR_SHEETDB_ID")) {
+    showMessage("SheetDB endpoint not configured. Please add your SheetDB ID.", "error");
+    return;
+  }
+
   if (hasClientErrors()) {
     showMessage("Please fill in all required fields.", "error");
     return;
@@ -52,13 +58,27 @@ form.addEventListener("submit", async (e) => {
 
   try {
     const formData = new FormData(form);
+    const payload = {
+      data: [
+        {
+          name: formData.get("name"),
+          email: formData.get("email"),
+          postcode: formData.get("postcode"),
+          role: formData.get("role"),
+          notes: formData.get("notes") || "",
+          consent: formData.get("consent") ? "yes" : "no",
+          submitted_at: new Date().toISOString(),
+        },
+      ],
+    };
 
-    const res = await fetch(form.action, {
+    const res = await fetch(SHEETDB_ENDPOINT, {
       method: "POST",
-      body: formData,
       headers: {
+        "Content-Type": "application/json",
         Accept: "application/json",
       },
+      body: JSON.stringify(payload),
     });
 
     if (res.ok) {
